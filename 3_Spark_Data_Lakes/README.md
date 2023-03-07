@@ -24,6 +24,17 @@ To only make available the data from users who agreed to share their data, the f
 
 2. **Trusted zones:**
       
+      As some of the users have accepted to share their information, the data available should only be the one related to those users.
+      The following scripts create glue jobs that only leaves the information of these users on customers, accelerometer and step trainer tables:
       
+      - [customer_landing_to_trusted.py](scripts/customer_landing_to_trusted.py)
+      - [accelerometer_landing_to_trusted.py](scripts/accelerometer_landing_to_trusted.py)
+      - [step_trainer_landing_to_trusted.py](scripts/step_trainer_landing_to_trusted.py)
 
-3. 
+3. **Curated zones:**
+
+     Finally, for the customers, the need data is the one from the users who agreed to share their data and also have received their sensor.
+     - [customer_trusted_to_curated.py](scripts/customer_trusted_to_curated.py)
+     
+     With these tables created, the final data that will be available for the analytics team will be created with the following script:
+     - [machine_learning_curated.py](scripts/machine_learning_curated.py)
