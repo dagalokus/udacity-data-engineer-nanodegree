@@ -14,6 +14,10 @@ from udacity.common import final_project_sql_statements
 default_args = {
     'owner': 'udacity',
     'start_date': pendulum.now(),
+    'depends_on_past': False,
+    'retries': 3,
+    'retry_delay': timedelta(minutes=5),
+    'catchup': False
 }
 
 @dag(
@@ -86,6 +90,8 @@ def final_project():
     @task()
     run_quality_checks = DataQualityOperator(
         task_id='Run_data_quality_checks',
+        redshift_conn_id="redshift",
+        table='songplays'
     )
 
     @task
