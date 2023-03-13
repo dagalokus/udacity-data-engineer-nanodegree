@@ -94,24 +94,24 @@ def final_project():
         table='songplays',
         checks=[
             {
-                "sql": "SELECT COUNT(*) FROM public.songplays WHERE playid IS NULL",
-                "expected": 0,
+                "test_sql": "SELECT COUNT(*) FROM public.songplays WHERE playid IS NULL",
+                "expected_result": 0,
             },
             {
-                "sql": "SELECT COUNT(*) FROM public.artists WHERE artistid IS NULL",
-                "expected": 0,
+                "test_sql": "SELECT COUNT(*) FROM public.artists WHERE artistid IS NULL",
+                "expected_result": 0,
             },
             {
-                "sql": "SELECT COUNT(*) FROM public.songs WHERE songid IS NULL",
-                "expected": 0,
+                "test_sql": "SELECT COUNT(*) FROM public.songs WHERE songid IS NULL",
+                "expected_result": 0,
             },
             {
-                "sql": "SELECT COUNT(*) FROM public.users WHERE userid IS NULL",
-                "expected": 0,
+                "test_sql": "SELECT COUNT(*) FROM public.users WHERE userid IS NULL",
+                "expected_result": 0,
             },
             {
-                "sql": 'SELECT COUNT(*) FROM public."time" WHERE start_time IS NULL',
-                "expected": 0,
+                "test_sql": 'SELECT COUNT(*) FROM public."time" WHERE start_time IS NULL',
+                "expected_result": 0,
             },
         ]
     )
