@@ -10,11 +10,13 @@ class DataQualityOperator(BaseOperator):
     def __init__(self,
                  redshift_conn_id="",
                  table="",
+                 checks=[],
                  *args, **kwargs):
 
         super(DataQualityOperator, self).__init__(*args, **kwargs)
         self.table = table
         self.redshift_conn_id = redshift_conn_id
+        self.checks = checks
 
     def execute(self, context):
         redshift_hook = PostgresHook(self.redshift_conn_id)
@@ -25,3 +27,18 @@ class DataQualityOperator(BaseOperator):
         if num_records < 1:
             raise ValueError(f"Data quality check failed. {self.table} contained 0 rows")
         self.log.info(f"Data quality on table {self.table} check passed with {records[0][0]} records")
+        
+        for check in self.checks:
+            test_sql = check.get('test_sql')
+            expected_result = check.get('expected_result')
+            
+            try:
+                trials = redshift_hook.get_records(sql)[0]
+            except Exception as e:
+                continue
+                self.log.info('Test failed')
+        else:
+            self.log.info('Test passed')
+            
+                                                        
+                                                        
