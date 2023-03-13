@@ -33,7 +33,7 @@ class DataQualityOperator(BaseOperator):
             expected_result = check.get('expected_result')
             
             try:
-                trials = redshift_hook.get_records(sql)[0]
+                trials = redshift_hook.get_records(test_sql)[0]
             except Exception as e:
                 continue
                 self.log.info('Test failed')
